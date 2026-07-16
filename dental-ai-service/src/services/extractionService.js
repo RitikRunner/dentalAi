@@ -1,0 +1,48 @@
+import { ChatOllama } from "@langchain/ollama";
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+
+import { env } from "../config/env.js";
+import { extractionPrompt } from "../prompts/extractionPrompt.js";
+
+const extractor = new ChatOllama({
+    model: env.OLLAMA_MODEL,
+    baseUrl: env.OLLAMA_BASE_URL,
+    temperature: 0,
+});
+
+export async function extractState(messages) {
+
+    // Get the latest user message
+    const latestMessage = messages[messages.length - 1]?.content ?? "";
+
+    const response = await extractor.invoke([
+        new SystemMessage(extractionPrompt),
+        new HumanMessage(latestMessage),
+    ]);
+
+    try {
+
+        return JSON.parse(response.content);
+
+    } catch (err) {
+
+        console.error("Extraction JSON Error:", response.content);
+
+        return {
+            patient: {
+                name: null,
+                phone: null,
+            },
+
+            appointment: {
+                branch: null,
+                doctor: null,
+                date: null,
+                preferredTime: null,
+                reason: null,
+            },
+        };
+
+    }
+
+}
