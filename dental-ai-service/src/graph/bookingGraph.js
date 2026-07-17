@@ -6,6 +6,7 @@ import { intentNode } from "./intentNode.js";
 import { toolNode } from "./toolNode.js";
 import { decisionNode } from "./decisionNode.js";
 import { stateExtractionNode } from "./stateExtractionNode.js";
+// import { confirmationNode } from "./confirmationNode.js";
 
 
 const graph = new StateGraph(DentalState);
@@ -19,6 +20,8 @@ graph.addNode("intentClassifier", intentNode);
 graph.addNode("extract", stateExtractionNode);
 
 graph.addNode("decision", decisionNode);
+
+// graph.addNode("confirmation", confirmationNode);
 
 registerEdges(graph);
 

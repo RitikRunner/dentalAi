@@ -18,6 +18,8 @@ export async function stateExtractionNode(state) {
             ...extracted.appointment,
         },
 
+        conversationStage: "INTENT_CLASSIFIED",
+
     };
 
 }

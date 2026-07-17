@@ -20,17 +20,19 @@ export async function toolNode(state) {
 );
 
     return {
+    ...state,
 
-        ...state,
+    toolResult: result,
 
-        toolResult: result,
+    confirmationPending: true,
 
-        messages: [
-            ...state.messages,
-            toolMessage,
-        ],
+    messages: [
+        ...state.messages,
+        toolMessage,
+    ],
 
-        toolCalls: [],
+    toolCalls: [],
 
-    };
+    conversationStage: "TOOL_COMPLETED",
+};
 }

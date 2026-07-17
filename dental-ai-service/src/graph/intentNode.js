@@ -37,6 +37,8 @@ export async function intentNode(state) {
 
         intent,
 
+        conversationStage: "INTENT_CLASSIFIED",
+
     };
 
 }

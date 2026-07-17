@@ -13,6 +13,22 @@ export const DentalState = Annotation.Root({
         }),
     }),
 
+    confirmationPending: Annotation({
+    default: () => false,
+    }),
+
+    conversationStage: Annotation({
+    default: () => "START",
+    }),
+
+    confirmed: Annotation({
+    default: () => false,
+    }),
+
+    bookingStatus: Annotation({
+    default: () => "draft",
+     }),
+
     appointment: Annotation({
         default: () => ({
             branch: null,
