@@ -2,6 +2,7 @@ import { ChatOllama } from "@langchain/ollama";
 import {
     HumanMessage,
     AIMessage,
+    ToolMessage,
     SystemMessage,
 } from "@langchain/core/messages";
 
@@ -29,21 +30,31 @@ const modelWithTools = model.bindTools(dentalTools);
 
 export async function invokeDentalAgent(messages) {
 
-    const chatHistory = messages
-        .map((msg) => {
+    const chatHistory = messages.map((msg) => {
 
-            if (msg.role === "user") {
-                return new HumanMessage(msg.content);
-            }
+    if (msg instanceof HumanMessage) {
+        return msg;
+    }
 
-            if (msg.role === "assistant") {
-                return new AIMessage(msg.content);
-            }
+    if (msg instanceof AIMessage) {
+        return msg;
+    }
 
-            return null;
+    if (msg instanceof ToolMessage) {
+        return msg;
+    }
 
-        })
-        .filter(Boolean);
+    if (msg.role === "user") {
+        return new HumanMessage(msg.content);
+    }
+
+    if (msg.role === "assistant") {
+        return new AIMessage(msg.content);
+    }
+
+    return null;
+
+}).filter(Boolean);
 
     const response = await modelWithTools.invoke([
         new SystemMessage(prompt),

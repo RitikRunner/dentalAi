@@ -14,7 +14,7 @@ graph.addNode("chatbot", chatbotNode);
 
 graph.addNode("tool", toolNode);
 
-graph.addNode("intent", intentNode);
+graph.addNode("intentClassifier", intentNode);
 
 graph.addNode("extract", stateExtractionNode);
 

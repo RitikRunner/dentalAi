@@ -2,19 +2,17 @@ import { START, END } from "@langchain/langgraph";
 
 export function registerEdges(graph) {
 
-    graph.addEdge(START, "intent");
+    graph.addEdge(START, "intentClassifier");
 
-    graph.addEdge("intent", "extract");
+    graph.addEdge("intentClassifier", "extract");
 
-    graph.addEdge("extract", "decision");
+    // Chatbot runs BEFORE the decision
+    graph.addEdge("extract", "chatbot");
 
     graph.addConditionalEdges(
         "decision",
-
         (state) => state.next,
-
         {
-            chatbot: "chatbot",
             tool: "tool",
             end: END,
         }
@@ -22,6 +20,5 @@ export function registerEdges(graph) {
 
     graph.addEdge("chatbot", "decision");
 
-    graph.addEdge("tool", "decision");
-
+    graph.addEdge("tool", "chatbot");
 }

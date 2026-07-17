@@ -1,15 +1,10 @@
-export function createToolMessage(toolResult) {
-    return {
-        role: "user",
-        content: `
-The requested tool has completed.
+import { ToolMessage } from "@langchain/core/messages";
 
-Tool Result:
+export function createToolMessage(toolCallId, toolResult) {
 
-${JSON.stringify(toolResult)}
+    return new ToolMessage({
+        tool_call_id: toolCallId,
+        content: JSON.stringify(toolResult),
+    });
 
-Using only this result, respond naturally to the patient.
-Do not invent information.
-`
-    };
 }

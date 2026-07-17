@@ -1,4 +1,4 @@
-import { executeTool } from "../services/toolExecutor.js";
+import { executeTool } from "../tools/toolExecutor.js";
 import { createToolMessage } from "../utils/toolMessage.js";
 
 export async function toolNode(state) {
@@ -14,7 +14,10 @@ export async function toolNode(state) {
         toolCall.args
     );
 
-    const toolMessage = createToolMessage(result);
+    const toolMessage = createToolMessage(
+    toolCall.id,
+    result
+);
 
     return {
 
