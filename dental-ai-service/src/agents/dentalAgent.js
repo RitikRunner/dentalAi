@@ -8,7 +8,6 @@ import {
 
 import { env } from "../config/env.js";
 import buildSystemPrompt from "../prompts/systemPrompts.js";
-
 import { dentalTools } from "./tools.js";
 
 const model = new ChatOllama({
@@ -17,49 +16,76 @@ const model = new ChatOllama({
     temperature: 0,
 });
 
-const prompt = buildSystemPrompt({
-    currentDatetime: new Date().toISOString(),
-    conversationState: "...",
-    retrievedContext: "...",
-});
-
-
-// Bind tools to the model
-
+// Bind tools once
 const modelWithTools = model.bindTools(dentalTools);
 
-export async function invokeDentalAgent(messages) {
+export async function invokeDentalAgent(state) {
 
-    const chatHistory = messages.map((msg) => {
+    // Build the system prompt dynamically every request
+    const prompt = buildSystemPrompt({
+        currentDatetime: new Date().toISOString(),
 
-    if (msg instanceof HumanMessage) {
-        return msg;
-    }
+        conversationState: JSON.stringify(
+            {
+                patient: state.patient,
+                appointment: state.appointment,
+                intent: state.intent,
+                conversationStage: state.conversationStage,
+                confirmationPending: state.confirmationPending,
+                bookingStatus: state.bookingStatus,
+            },
+            null,
+            2
+        ),
 
-    if (msg instanceof AIMessage) {
-        return msg;
-    }
+        retrievedContext: "",
+        additionalServices: "",
+        insuranceAndPayment: "Not available",
+    });
 
-    if (msg instanceof ToolMessage) {
-        return msg;
-    }
+    // Convert graph messages into LangChain messages
+    const chatHistory = state.messages
+        .map((msg) => {
 
-    if (msg.role === "user") {
-        return new HumanMessage(msg.content);
-    }
+            if (msg instanceof HumanMessage) return msg;
 
-    if (msg.role === "assistant") {
-        return new AIMessage(msg.content);
-    }
+            if (msg instanceof AIMessage) return msg;
 
-    return null;
+            if (msg instanceof ToolMessage) return msg;
 
-}).filter(Boolean);
+            if (msg.role === "user") {
+                return new HumanMessage(msg.content);
+            }
 
-    const response = await modelWithTools.invoke([
-        new SystemMessage(prompt),
-        ...chatHistory,
-    ]);
+            if (msg.role === "assistant") {
+                return new AIMessage(msg.content);
+            }
+
+            if (msg.role === "tool") {
+                return new ToolMessage({
+                    content: msg.content,
+                    tool_call_id: msg.tool_call_id,
+                });
+            }
+
+            return null;
+
+        })
+        .filter(Boolean);
+
+    const messages = [
+    new SystemMessage(prompt),
+];
+
+if (state.workflowInstruction) {
+    messages.push(
+        new SystemMessage(state.workflowInstruction)
+    );
+}
+
+messages.push(...chatHistory);
+
+const response = await modelWithTools.invoke(messages);
 
     return response;
 }

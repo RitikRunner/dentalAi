@@ -13,6 +13,14 @@ export const DentalState = Annotation.Root({
         }),
     }),
 
+    domain: Annotation({
+    default: () => null,
+}),
+
+    domainValidated: Annotation({
+    default: () => false,
+}),
+
     confirmationPending: Annotation({
     default: () => false,
     }),

@@ -2,23 +2,51 @@ import { START, END } from "@langchain/langgraph";
 
 export function registerEdges(graph) {
 
-    graph.addEdge(START, "intentClassifier");
+    graph.addEdge(START, "workflowRouter");
+
+    graph.addConditionalEdges(
+    "workflowRouter",
+    (state) => state.next,
+    {
+        domainGuard: "domainGuard",
+        extract: "extract",
+    }
+);
+
+    graph.addConditionalEdges(
+    "domainGuard",
+    (state) => {
+
+        console.log("Routing State:", state);
+
+        console.log("Routing domain:", state.domain);
+
+        return state.domain;
+
+    },
+    {
+        DENTAL: "intentClassifier",
+        OUT_OF_SCOPE: "outOfScope",
+    }
+);
 
     graph.addEdge("intentClassifier", "extract");
 
-    // Chatbot runs BEFORE the decision
-    graph.addEdge("extract", "chatbot");
-
+    graph.addEdge("extract", "missingField");
+    
     graph.addConditionalEdges(
-        "decision",
-        (state) => state.next,
-        {
-            tool: "tool",
-            end: END,
-        }
-    );
+    "missingField",
+    (state) => state.next,
+    {
+        chatbot: "chatbot",
+        decision: "decision",
+    }
+);
 
     graph.addEdge("chatbot", "decision");
 
-    graph.addEdge("tool", "chatbot");
+    graph.addEdge("decision", END);
+
+    graph.addEdge("outOfScope", END);
+
 }

@@ -13,6 +13,10 @@ export async function chat(req, res) {
 
         const conversation = await getConversation(sessionId);
 
+        console.log("Conversation:", conversation);
+console.log("Is Array:", Array.isArray(conversation));
+console.log("Type:", typeof conversation);
+
         conversation.push({
             role: "user",
             content: message,
