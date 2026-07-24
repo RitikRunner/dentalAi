@@ -50,7 +50,8 @@ const SECTIONS = [
   healthcareSafety,    // 9
   emergencyProtocol,   // 10
   escalationPolicy,    // 11
-  outOfScopePolicy,    // 12
+  outOfScopePolicy, 
+  workflowControl,   // 12
   conversationStyle,   // 13
   security,            // 14
   failureHandling,     // 15

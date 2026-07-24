@@ -1,35 +1,42 @@
-
-import { domainGuardPrompt } from "../prompts/domainGuardPrompt.js";
-import { rawChat } from "../llm/ollama.js";
+const dentalKeywords = [
+  "dentist",
+  "dental",
+  "appointment",
+  "book",
+  "booking",
+  "cancel",
+  "reschedule",
+  "doctor",
+  "clinic",
+  "tooth",
+  "teeth",
+  "gum",
+  "rct",
+  "root canal",
+  "implant",
+  "braces",
+  "aligner",
+  "whitening",
+  "scaling",
+  "cleaning",
+  "pain",
+  "crown",
+  "bridge",
+  "veneer",
+];
 
 export async function classifyDomain(message) {
 
-    const response = await rawChat([
-        {
-            role: "system",
-            content: domainGuardPrompt,
-        },
-        {
-            role: "user",
-            content: message,
-        },
-    ]);
+    const text = message.toLowerCase();
 
-    console.log("========== DOMAIN RAW ==========");
-    console.log(response);
-    console.log("===============================");
+    const isDental = dentalKeywords.some(keyword =>
+        text.includes(keyword)
+    );
 
-    try {
+    return {
+        domain: isDental
+            ? "DENTAL"
+            : "OUT_OF_SCOPE",
+    };
 
-        return JSON.parse(response);
-
-    } catch (err) {
-
-        console.error("JSON Parse Failed");
-
-        return {
-            domain: "OUT_OF_SCOPE",
-        };
-
-    }
 }

@@ -57,4 +57,8 @@ export const DentalState = Annotation.Root({
 
     next: Annotation(),
 
+    nextAction: Annotation({
+    default: () => null,
+}),
+
 });

@@ -10,6 +10,9 @@ import { env } from "../config/env.js";
 import buildSystemPrompt from "../prompts/systemPrompts.js";
 import { dentalTools } from "./tools.js";
 
+import { buildWorkflowInstruction }
+from "../prompts/workflowInstruction.js";
+
 const model = new ChatOllama({
     baseUrl: env.OLLAMA_BASE_URL,
     model: env.OLLAMA_MODEL,
@@ -31,6 +34,7 @@ export async function invokeDentalAgent(state) {
                 appointment: state.appointment,
                 intent: state.intent,
                 conversationStage: state.conversationStage,
+                nextAction: state.nextAction, 
                 confirmationPending: state.confirmationPending,
                 bookingStatus: state.bookingStatus,
             },
@@ -79,11 +83,13 @@ export async function invokeDentalAgent(state) {
 
 if (state.workflowInstruction) {
     messages.push(
-        new SystemMessage(state.workflowInstruction)
-    );
+    new SystemMessage(buildWorkflowInstruction(state))
+);
 }
 
 messages.push(...chatHistory);
+console.log("========== FINAL SYSTEM PROMPT ==========");
+console.log(prompt);
 
 const response = await modelWithTools.invoke(messages);
 

@@ -1,71 +1,57 @@
 export async function missingFieldNode(state) {
 
-    // Patient Name
-    if (!state.patient?.name) {
+    console.log("========== MISSING FIELD ==========");
+    console.dir(state,{depth:null});
 
+    if (!state.patient.name) {
         return {
             ...state,
-            conversationStage: "WAITING_NAME",
             nextAction: "ASK_NAME",
+            conversationStage: "WAITING_NAME",
             next: "chatbot",
         };
-
     }
 
-    // Patient Phone
-    if (!state.patient?.phone) {
-
+    if (!state.patient.phone) {
         return {
             ...state,
-            conversationStage: "WAITING_PHONE",
             nextAction: "ASK_PHONE",
+            conversationStage: "WAITING_PHONE",
             next: "chatbot",
         };
-
     }
 
-    // Branch
-    if (!state.appointment?.branch) {
-
+    if (!state.appointment.branch) {
         return {
             ...state,
-            conversationStage: "WAITING_BRANCH",
             nextAction: "ASK_BRANCH",
+            conversationStage: "WAITING_BRANCH",
             next: "chatbot",
         };
-
     }
 
-    // Date
-    if (!state.appointment?.date) {
-
+    if (!state.appointment.date) {
         return {
             ...state,
-            conversationStage: "WAITING_DATE",
             nextAction: "ASK_DATE",
+            conversationStage: "WAITING_DATE",
             next: "chatbot",
         };
-
     }
 
-    // Time
-    if (!state.appointment?.preferredTime) {
-
+    if (!state.appointment.preferredTime) {
         return {
             ...state,
-            conversationStage: "WAITING_TIME",
             nextAction: "ASK_TIME",
+            conversationStage: "WAITING_TIME",
             next: "chatbot",
         };
-
     }
 
-    // Everything collected
     return {
         ...state,
-        conversationStage: "READY_FOR_BOOKING",
         nextAction: "READY_FOR_BOOKING",
+        conversationStage: "READY_FOR_BOOKING",
         next: "decision",
     };
-
 }
