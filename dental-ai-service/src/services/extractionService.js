@@ -10,13 +10,17 @@ const extractor = new ChatOllama({
     temperature: 0,
 });
 
-export async function extractState(messages) {
+export async function extractState(messages, conversationStage, lastAssistantQuestion) {
 
     // Get the latest user message
     const latestMessage = messages[messages.length - 1]?.content ?? "";
 
+    const promptWithContext = extractionPrompt
+        .replace("{{CONVERSATION_STAGE}}", conversationStage || "UNKNOWN")
+        .replace("{{LAST_ASSISTANT_QUESTION}}", lastAssistantQuestion || "NONE");
+
     const response = await extractor.invoke([
-        new SystemMessage(extractionPrompt),
+        new SystemMessage(promptWithContext),
         new HumanMessage(latestMessage),
     ]);
 

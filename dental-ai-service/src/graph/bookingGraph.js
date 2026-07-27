@@ -13,6 +13,10 @@ import { outOfScopeNode } from "./nodes/outOfScopeNode.js";
 import { missingFieldNode } from "./nodes/missingFieldNode.js";
 import { workflowRouterNode } from "./nodes/workflowRouterNode.js";
 
+import { toolExecutorNode } from "./nodes/toolExecutorNode.js";
+
+import { confirmationNode } from "./nodes/confirmationNode.js";
+
 const graph = new StateGraph(DentalState);
 
 graph.addNode("workflowRouter", workflowRouterNode);
@@ -21,11 +25,15 @@ graph.addNode("domainGuard", domainGuardNode);
 
 graph.addNode("outOfScope", outOfScopeNode);
 
+graph.addNode("toolExecutor", toolExecutorNode);
+
 graph.addNode("intentClassifier", intentNode);
 
 graph.addNode("extract", stateExtractionNode);
 
 graph.addNode("missingField", missingFieldNode);
+
+graph.addNode("confirmation", confirmationNode);
 
 graph.addNode("chatbot", chatbotNode);
 

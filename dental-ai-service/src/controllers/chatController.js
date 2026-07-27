@@ -1,37 +1,33 @@
-// import { chatWithAI } from "../llm/ollama.js";
 import { processGraph } from "../services/graphService.js";
 import {
-    getConversation,
-    saveConversation,
+    loadState,
+    saveState,
 } from "../services/conversationService.js";
 
 export async function chat(req, res) {
-
     try {
 
         const { message, sessionId = "demo-user" } = req.body;
 
-        const conversation = await getConversation(sessionId);
+        const state = await loadState(sessionId);
 
-        console.log("Conversation:", conversation);
-console.log("Is Array:", Array.isArray(conversation));
-console.log("Type:", typeof conversation);
-
-        conversation.push({
+        state.messages.push({
             role: "user",
             content: message,
         });
 
-        const graphResult = await processGraph(conversation);
+        const updatedState = await processGraph(state);
 
-        const reply = graphResult.finalResponse;
+        const reply = updatedState.finalResponse;
 
-        conversation.push({
-            role: "assistant",
-            content: reply,
-        });
+        if (reply?.trim()) {
+            updatedState.messages.push({
+                role: "assistant",
+                content: reply,
+            });
+        }
 
-        await saveConversation(sessionId, conversation);
+        await saveState(sessionId, updatedState);
 
         res.json({
             success: true,

@@ -2,9 +2,13 @@ import { Annotation } from "@langchain/langgraph";
 
 export const DentalState = Annotation.Root({
 
-    messages: Annotation(),
+    messages: Annotation({
+    default: () => [],
+}),
 
-    intent: Annotation(),
+    intent: Annotation({
+    default: () => null,
+}),
 
     patient: Annotation({
         default: () => ({
@@ -26,8 +30,8 @@ export const DentalState = Annotation.Root({
     }),
 
     conversationStage: Annotation({
-    default: () => "START",
-    }),
+    default: () => "IDLE",
+}),
 
     confirmed: Annotation({
     default: () => false,
@@ -51,13 +55,27 @@ export const DentalState = Annotation.Root({
         default: () => [],
     }),
 
-    toolResult: Annotation(),
+    toolResult: Annotation({
+    default: () => null,
+}),
 
-    finalResponse: Annotation(),
+    finalResponse: Annotation({
+    default: () => "",
+}),
 
-    next: Annotation(),
+    next: Annotation({
+    default: () => null,
+}),
 
     nextAction: Annotation({
+    default: () => null,
+}),
+
+toolExecuted: Annotation({
+    default: () => false,
+}),
+
+lastTool: Annotation({
     default: () => null,
 }),
 

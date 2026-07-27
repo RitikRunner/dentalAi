@@ -1,28 +1,27 @@
 export async function workflowRouterNode(state) {
 
     console.log("========== WORKFLOW ROUTER ==========");
-
     console.log("Current Stage:", state.conversationStage);
 
-    // If we are already inside a booking flow,
-    // skip classification completely.
+    // Brand new conversation
     if (
-        state.conversationStage &&
-        state.conversationStage !== "IDLE"
+        !state.conversationStage ||
+        state.conversationStage === "START"
     ) {
 
-        console.log("Continuing existing workflow...");
+        console.log("Starting new workflow...");
 
         return {
             ...state,
-            next: "extract",
+            next: "domainGuard",
         };
     }
 
-    console.log("Starting new workflow...");
+    // Existing booking workflow
+    console.log("Continuing existing workflow...");
 
     return {
         ...state,
-        next: "domainGuard",
+        next: "extract",
     };
 }

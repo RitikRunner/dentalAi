@@ -1,23 +1,27 @@
 export async function decisionNode(state) {
 
     // 1. LLM requested a tool
-    if (state.toolCalls?.length > 0) {
+    if (
+        state.toolCalls &&
+        state.toolCalls.length > 0
+    ) {
         return {
             ...state,
-            next: "tool",
+            next: "toolExecutor",
         };
     }
 
     // 2. Waiting for booking confirmation
-    // if (
-    //     state.conversationStage === "WAITING_CONFIRMATION" ||
-    //     state.confirmationPending
-    // ) {
-    //     return {
-    //         ...state,
-    //         next: "confirmation",
-    //     };
-    // }
+    if (
+        state.conversationStage === "READY_FOR_BOOKING" ||
+        state.confirmationPending
+    ) {
+        return {
+            ...state,
+            confirmationPending: true,
+            next: "confirmation",
+        };
+    }
 
     // // 3. Future RAG
     // if (state.intent === "treatment_information") {
@@ -27,19 +31,9 @@ export async function decisionNode(state) {
     //     };
     // }
 
-//     if (
-//     state.conversationStage === "WAITING_CONFIRMATION" ||
-//     state.confirmationPending
-// ) {
-//     return {
-//         ...state,
-//         next: "end",
-//     };
-// }
-
     // 4. Conversation finished
     return {
         ...state,
-        next: "end",
+        next: "END",
     };
 }

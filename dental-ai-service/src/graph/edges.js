@@ -42,11 +42,32 @@ export function registerEdges(graph) {
         decision: "decision",
     }
 );
+graph.addEdge("chatbot", "decision");
 
-    graph.addEdge("chatbot", "decision");
+graph.addConditionalEdges(
+    "decision",
+    (state) => state.next,
+    {
+        confirmation: "confirmation",
+        chatbot: "chatbot",
+        toolExecutor: "toolExecutor",
+        END: END,
+    }
+);
 
-    graph.addEdge("decision", END);
+graph.addConditionalEdges(
+    "confirmation",
+    (state) => state.next,
+    {
+        toolExecutor: "toolExecutor",
+        chatbot: "chatbot",
+    }
+);
 
-    graph.addEdge("outOfScope", END);
+
+
+graph.addEdge("toolExecutor", "chatbot");
+
+graph.addEdge("outOfScope", END);
 
 }

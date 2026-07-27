@@ -8,10 +8,8 @@ import {
 
 import { env } from "../config/env.js";
 import buildSystemPrompt from "../prompts/systemPrompts.js";
+import { buildWorkflowInstruction } from "../prompts/workflowInstruction.js";
 import { dentalTools } from "./tools.js";
-
-import { buildWorkflowInstruction }
-from "../prompts/workflowInstruction.js";
 
 const model = new ChatOllama({
     baseUrl: env.OLLAMA_BASE_URL,
@@ -24,7 +22,7 @@ const modelWithTools = model.bindTools(dentalTools);
 
 export async function invokeDentalAgent(state) {
 
-    // Build the system prompt dynamically every request
+    // Build the main system prompt
     const prompt = buildSystemPrompt({
         currentDatetime: new Date().toISOString(),
 
@@ -34,7 +32,7 @@ export async function invokeDentalAgent(state) {
                 appointment: state.appointment,
                 intent: state.intent,
                 conversationStage: state.conversationStage,
-                nextAction: state.nextAction, 
+                nextAction: state.nextAction,
                 confirmationPending: state.confirmationPending,
                 bookingStatus: state.bookingStatus,
             },
@@ -73,25 +71,40 @@ export async function invokeDentalAgent(state) {
             }
 
             return null;
-
         })
         .filter(Boolean);
 
+    // Build workflow instruction
+    const workflowInstruction = buildWorkflowInstruction(state);
+
+    // Final message list
     const messages = [
-    new SystemMessage(prompt),
-];
+        new SystemMessage(prompt),
+    ];
 
-if (state.workflowInstruction) {
-    messages.push(
-    new SystemMessage(buildWorkflowInstruction(state))
-);
-}
+    if (workflowInstruction) {
+        messages.push(
+            new SystemMessage(workflowInstruction)
+        );
+    }
 
-messages.push(...chatHistory);
-console.log("========== FINAL SYSTEM PROMPT ==========");
-console.log(prompt);
+    messages.push(...chatHistory);
 
-const response = await modelWithTools.invoke(messages);
+    // Debug (temporary)
+    console.log("========== FINAL SYSTEM PROMPT ==========");
+    console.log(prompt);
+
+    console.log("========== WORKFLOW INSTRUCTION ==========");
+    console.log(workflowInstruction);
+
+    console.log("========== FINAL MESSAGE LIST ==========");
+    console.dir(messages, { depth: null });
+
+    const response = await model.invoke(messages);
+
+
+console.log("\n========== RAW LLM RESPONSE ==========");
+console.dir(response, { depth: null });
 
     return response;
 }
