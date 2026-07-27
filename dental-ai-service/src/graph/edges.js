@@ -16,17 +16,24 @@ export function registerEdges(graph) {
     graph.addConditionalEdges(
     "domainGuard",
     (state) => {
-
         console.log("Routing State:", state);
-
         console.log("Routing domain:", state.domain);
 
-        return state.domain;
+        if (state.domain === "OUT_OF_SCOPE") {
+            return "outOfScope";
+        }
 
+        // If conversation is already started, jump straight to extraction
+        if (state.conversationStage && state.conversationStage !== "START") {
+            return "extract";
+        }
+
+        return "intentClassifier";
     },
     {
-        DENTAL: "intentClassifier",
-        OUT_OF_SCOPE: "outOfScope",
+        intentClassifier: "intentClassifier",
+        extract: "extract",
+        outOfScope: "outOfScope",
     }
 );
 

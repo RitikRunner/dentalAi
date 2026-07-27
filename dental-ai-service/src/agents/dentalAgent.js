@@ -82,13 +82,13 @@ export async function invokeDentalAgent(state) {
         new SystemMessage(prompt),
     ];
 
+    messages.push(...chatHistory);
+
     if (workflowInstruction) {
         messages.push(
             new SystemMessage(workflowInstruction)
         );
     }
-
-    messages.push(...chatHistory);
 
     // Debug (temporary)
     console.log("========== FINAL SYSTEM PROMPT ==========");
