@@ -45,10 +45,11 @@ export function registerEdges(graph) {
     "missingField",
     (state) => state.next,
     {
-        chatbot: "chatbot",
+        chatbot: "retrievalNode",
         decision: "decision",
     }
 );
+graph.addEdge("retrievalNode", "chatbot");
 graph.addEdge("chatbot", "decision");
 
 graph.addConditionalEdges(
@@ -56,7 +57,7 @@ graph.addConditionalEdges(
     (state) => state.next,
     {
         confirmation: "confirmation",
-        chatbot: "chatbot",
+        chatbot: "retrievalNode",
         toolExecutor: "toolExecutor",
         END: END,
     }
@@ -67,13 +68,13 @@ graph.addConditionalEdges(
     (state) => state.next,
     {
         toolExecutor: "toolExecutor",
-        chatbot: "chatbot",
+        chatbot: "retrievalNode",
     }
 );
 
 
 
-graph.addEdge("toolExecutor", "chatbot");
+graph.addEdge("toolExecutor", "retrievalNode");
 
 graph.addEdge("outOfScope", END);
 

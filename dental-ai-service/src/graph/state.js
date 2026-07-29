@@ -63,6 +63,10 @@ export const DentalState = Annotation.Root({
     default: () => "",
 }),
 
+    ragContext: Annotation({
+    default: () => "",
+}),
+
     next: Annotation({
     default: () => null,
 }),

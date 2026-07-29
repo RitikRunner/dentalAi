@@ -23,6 +23,14 @@ const dentalKeywords = [
   "crown",
   "bridge",
   "veneer",
+  // Greetings are allowed to pass the guard
+  "hello",
+  "hi",
+  "hey",
+  "good morning",
+  "good afternoon",
+  "good evening",
+  "help"
 ];
 
 export async function classifyDomain(message) {

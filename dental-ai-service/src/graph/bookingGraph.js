@@ -12,6 +12,7 @@ import { domainGuardNode } from "./nodes/domainGuardNode.js";
 import { outOfScopeNode } from "./nodes/outOfScopeNode.js";
 import { missingFieldNode } from "./nodes/missingFieldNode.js";
 import { workflowRouterNode } from "./nodes/workflowRouterNode.js";
+import { retrievalNode } from "./nodes/retrievalNode.js";
 
 import { toolExecutorNode } from "./nodes/toolExecutorNode.js";
 
@@ -35,6 +36,7 @@ graph.addNode("missingField", missingFieldNode);
 
 graph.addNode("confirmation", confirmationNode);
 
+graph.addNode("retrievalNode", retrievalNode);
 graph.addNode("chatbot", chatbotNode);
 
 graph.addNode("decision", decisionNode);

@@ -40,7 +40,7 @@ export async function invokeDentalAgent(state) {
             2
         ),
 
-        retrievedContext: "",
+        retrievedContext: state.ragContext || "No specific clinic knowledge found.",
         additionalServices: "",
         insuranceAndPayment: "Not available",
     });
