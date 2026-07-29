@@ -1,12 +1,14 @@
 import { dentalGraph } from "../graph/bookingGraph.js";
 
-export async function processGraph(messages) {
+export async function processGraph(state) {
 
-    const result = await dentalGraph.invoke({
+    console.log("========== GRAPH INPUT ==========");
+    console.dir(state, { depth: null });
 
-        messages,
+    const updatedState = await dentalGraph.invoke(state);
 
-    });
+    console.log("========== GRAPH OUTPUT ==========");
+    console.dir(updatedState, { depth: null });
 
-    return result;
+    return updatedState;
 }

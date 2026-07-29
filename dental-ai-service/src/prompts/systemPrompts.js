@@ -25,7 +25,9 @@
 
 import { identity, conversationStyle } from "./identity.js";
 import { runtimeContext, clinicFacts } from "./clinicContext.js";
-import { scope, intentAndFlows } from "./workflow.js";
+import {
+  scope,
+} from "./workflow.js";
 import { toolRules } from "./toolRules.js";
 import { rag } from "./rag.js";
 import { memory } from "./memory.js";
@@ -40,13 +42,12 @@ const SECTIONS = [
   scope,               // 3
   clinicFacts,         // 4
   rag,                 // 5
-  intentAndFlows,      // 6
   toolRules,           // 7
   memory,              // 8
   healthcareSafety,    // 9
   emergencyProtocol,   // 10
   escalationPolicy,    // 11
-  outOfScopePolicy,    // 12
+  outOfScopePolicy, 
   conversationStyle,   // 13
   security,            // 14
   failureHandling,     // 15
