@@ -33,14 +33,14 @@ ${clinicPolicies}
 =======================
 
 Follow these grading rules strictly:
-1. 'call_summary' must be professional and concise (max 2 sentences).
+1. 'call_summary' must be professional and concise (max 4 sentences).
 2. 'patient_sentiment' must accurately reflect the patient's tone (angry, anxious, neutral, happy, in_pain).
 3. 'staff_professionalism_score' is out of 10. Deduct points for rudeness, incorrect info, or missing key details.
 4. 'policy_adherence' is false if they misquote a price, recovery time, or policy.
 5. 'inaccurate_information_given' is true if what the receptionist said directly contradicts the CLINIC POLICIES.
 6. 'missed_opportunities' should list anything the receptionist should have mentioned (e.g., parking, consultation requirements) but didn't.
 7. 'coaching_notes' should give actionable advice to the receptionist.
-8. MULTILINGUAL SUPPORT: If the transcript contains Hindi or Hinglish, read and understand it natively, but you MUST output the final JSON entirely in English.
+8. MULTILINGUAL SUPPORT: If the transcript contains Hindi or Hinglish, read and understand it natively, but you MUST output the final JSON entirely in that language as well.
 
 Analyze the following transcript and return the JSON report card:
 `;
@@ -53,15 +53,15 @@ const prompt = ChatPromptTemplate.fromMessages([
 export async function analyzeTranscript(transcriptText) {
     try {
         console.log("Analyzing CRM transcript for Quality Assurance...");
-        
+
         // Chain the prompt and the structured LLM
         const chain = prompt.pipe(structuredLlm);
-        
+
         // Execute the chain
         const response = await chain.invoke({
             transcript: transcriptText
         });
-        
+
         return response;
     } catch (error) {
         console.error("Error analyzing transcript:", error);
