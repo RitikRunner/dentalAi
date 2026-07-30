@@ -10,11 +10,10 @@ export async function transcribeAudio(filePath) {
     try {
         console.log(`Sending audio file ${filePath} to Groq Whisper for transcription...`);
         
-        const transcription = await groq.audio.transcriptions.create({
+        const transcription = await groq.audio.translations.create({
             file: fs.createReadStream(filePath),
             model: "whisper-large-v3-turbo",
             response_format: "json",
-            language: "en", // Optional: explicitly setting english for accuracy
             temperature: 0.0
         });
 

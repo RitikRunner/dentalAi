@@ -40,6 +40,7 @@ Follow these grading rules strictly:
 5. 'inaccurate_information_given' is true if what the receptionist said directly contradicts the CLINIC POLICIES.
 6. 'missed_opportunities' should list anything the receptionist should have mentioned (e.g., parking, consultation requirements) but didn't.
 7. 'coaching_notes' should give actionable advice to the receptionist.
+8. MULTILINGUAL SUPPORT: If the transcript contains Hindi or Hinglish, read and understand it natively, but you MUST output the final JSON entirely in English.
 
 Analyze the following transcript and return the JSON report card:
 `;
