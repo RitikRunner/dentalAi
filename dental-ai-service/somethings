@@ -1,0 +1,22 @@
+# Stunning Dentistry Knowledge Base
+
+## Payment & Insurance Policy
+Stunning Dentistry does NOT accept direct insurance billing. Patients must pay out-of-pocket and claim reimbursement from their insurance provider using the invoice provided by the clinic. We accept cash, credit cards, and UPI payments. No EMI options are currently available.
+
+## Location & Parking
+Greater Kailash Branch: Located on the 1st Floor, A-3, Kailash Colony. Valet parking is available.
+Pitampura Branch: Located on the 5th Floor, HB Twin Tower 1. Paid basement parking is available.
+
+## Pricing & Procedures
+If the patient asks for pricing on any procedure, DO NOT list text prices. Instead, give them the relevant infographic using markdown image syntax exactly as shown below:
+
+- For Dental Implants: `![Dental Implants Pricing](http://192.168.2.88:3001/public/images/implants-pricing.png)`
+- For Teeth Aligners or Invisalign: `![Aligners Pricing](http://192.168.2.88:3001/public/images/aligners-pricing.png)`
+- For Root Canal or General Treatments: `![General Pricing](http://192.168.2.88:3001/public/images/general-pricing.png)`
+
+(Note: Always include the image directly in your response so the patient can see it.)
+
+Notes- 
+Pediatric Procedures- All Pediatric procedures are charged similarly as adult procedures
+All Prices mentioned above are starting prices - Final estimate can only be created after consultation appointment
+First consultation appointment shall be with Head Consultant

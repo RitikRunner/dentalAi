@@ -12,8 +12,7 @@ import { buildWorkflowInstruction } from "../prompts/workflowInstruction.js";
 import { dentalTools } from "./tools.js";
 
 const model = new ChatOllama({
-    baseUrl: env.OLLAMA_BASE_URL,
-    model: env.OLLAMA_MODEL,
+    model: env.OLLAMA_MODEL || "qwen2.5:3b",
     temperature: 0,
 });
 
@@ -82,7 +81,7 @@ export async function invokeDentalAgent(state) {
         new SystemMessage(prompt),
     ];
 
-    messages.push(...chatHistory);
+    messages.push(...chatHistory.slice(-6));
 
     if (workflowInstruction) {
         messages.push(
@@ -90,21 +89,6 @@ export async function invokeDentalAgent(state) {
         );
     }
 
-    // Debug (temporary)
-    console.log("========== FINAL SYSTEM PROMPT ==========");
-    console.log(prompt);
-
-    console.log("========== WORKFLOW INSTRUCTION ==========");
-    console.log(workflowInstruction);
-
-    console.log("========== FINAL MESSAGE LIST ==========");
-    console.dir(messages, { depth: null });
-
     const response = await model.invoke(messages);
-
-
-console.log("\n========== RAW LLM RESPONSE ==========");
-console.dir(response, { depth: null });
-
     return response;
 }

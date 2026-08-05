@@ -14,7 +14,6 @@ export async function transcribeAudio(filePath) {
             file: fs.createReadStream(filePath),
             model: "whisper-large-v3-turbo",
             response_format: "json",
-            language: "en", // Optional: explicitly setting english for accuracy
             temperature: 0.0
         });
 

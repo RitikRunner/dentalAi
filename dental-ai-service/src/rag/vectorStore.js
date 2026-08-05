@@ -54,7 +54,7 @@ export async function initVectorStore() {
     }
 }
 
-export async function searchKnowledgeBase(query, topK = 2) {
+export async function searchKnowledgeBase(query, topK = 5) {
     if (!vectorStoreData.length || !embeddingsModel) {
         console.warn("Vector Store not initialized. Returning empty context.");
         return "";

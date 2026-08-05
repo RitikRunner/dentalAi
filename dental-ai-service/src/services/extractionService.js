@@ -5,8 +5,7 @@ import { env } from "../config/env.js";
 import { extractionPrompt } from "../prompts/extractionPrompt.js";
 
 const extractor = new ChatOllama({
-    model: env.OLLAMA_MODEL,
-    baseUrl: env.OLLAMA_BASE_URL,
+    model: env.OLLAMA_MODEL || "qwen2.5:3b",
     temperature: 0,
 });
 

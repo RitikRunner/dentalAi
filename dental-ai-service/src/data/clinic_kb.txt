@@ -1,22 +1,75 @@
 # Stunning Dentistry Knowledge Base
 
-## Root Canal Treatment (RCT)
-A Root Canal Treatment is a dental procedure to relieve pain caused by an infected or abscessed tooth. During the root canal process, the inflamed or infected pulp is removed and the inside of the tooth is carefully cleaned and disinfected, then filled and sealed. 
-Pricing: Starts at Rs. 5,000 depending on the complexity of the tooth.
-Recovery: Most patients recover fully within a few days. Mild discomfort is normal for the first 24-48 hours.
-
-## Invisalign (Clear Aligners)
-Invisalign is a modern alternative to traditional metal braces. It uses a series of custom-made, clear, removable aligners that gradually straighten teeth.
-Process: The patient must first come in for a 3D scan consultation. Aligners must be worn for 20-22 hours a day.
-Pricing: Pricing starts at Rs. 50,000, but a consultation is required for an exact quote.
-
-## Teeth Whitening
-We offer professional, laser-assisted teeth whitening that can lighten your teeth by up to 8 shades in a single 45-minute session.
-Side Effects: Some patients may experience temporary tooth sensitivity for 1-2 days after the procedure.
-
 ## Payment & Insurance Policy
 Stunning Dentistry does NOT accept direct insurance billing. Patients must pay out-of-pocket and claim reimbursement from their insurance provider using the invoice provided by the clinic. We accept cash, credit cards, and UPI payments. No EMI options are currently available.
 
 ## Location & Parking
 Greater Kailash Branch: Located on the 1st Floor, A-3, Kailash Colony. Valet parking is available.
 Pitampura Branch: Located on the 5th Floor, HB Twin Tower 1. Paid basement parking is available.
+
+## Pricing & Procedures
+If the patient asks for pricing on any procedure, enthusiastically state the starting text price from the list below. 
+ADDITIONALLY, if the procedure has a corresponding infographic image link listed below, you MUST provide the image link exactly as shown!
+
+Full Price List (in INR):
+- Dental Implants: ₹ 18,000 (Image link: `![Dental Implants Pricing](http://192.168.2.165:3001/public/images/implants-pricing.png)`)
+- Dental Implants - Premium: ₹ 28,000
+- Dental Implants - Ultra Premium: ₹ 40,000
+- Basal Implants: ₹ 18,000
+- Mini/Keyhole Implants: ₹ 18,000
+- Ceramic Implants: ₹ 40,000
+- Zygomatic & Pterygoid Implants: ₹ 40,000
+- Implant Crown-Including Abutment: ₹ 9,000
+- Implant Crown-Including Abutment - All Ceramic: ₹ 15,000
+- All on 4 Implants (Including Crowns): ₹ 198,000
+- All on 6 Implants (Including Crowns): ₹ 234,000
+- Full Mouth Implants (Including Crowns): ₹ 396,000
+- Bone Grafting: ₹ 25,000 (Image link: `![Bone Grafting Pricing](http://192.168.2.165:3001/public/images/boneGrafting-pricing.png)`)
+- Sinus Lift: ₹ 25,000
+- Teeth Veneers: ₹ 9,000 (Image link: `![Teeth Veneers Pricing](http://192.168.2.165:3001/public/images/TeethVaneers-pricing.png)`)
+- Lumineers: ₹ 15,000
+- Digital Smile Design (6+6): ₹ 108,000
+- Composite Bonding / Composite Veneers: ₹ 5,000
+- Tooth Gem/Jewellery: ₹ 5,000
+- Tooth Crown: ₹ 5,000
+- Tooth Crown (All Ceramic/Zirconia): ₹ 9,000
+- Tooth Extraction: ₹ 2,500
+- Tooth Extraction - For Implants: ₹ 1,000
+- Wisdom Molar Extraction: ₹ 3,000
+- Scaling & Polishing: ₹ 2,500
+- Fluoride Therapy: ₹ 15,000
+- Teeth Whitening - LED Assisted: ₹ 5,000
+- Teeth Whitening - LASER: ₹ 15,000
+- Tooth Fillings / Restorations: ₹ 2,500
+- Root Canal Treatment: ₹ 4,500 (Image link: `![Root Canal Pricing](http://192.168.2.165:3001/public/images/rootCanalTreatment-pricing.png)`)
+- Re-Root Canal Treatment: ₹ 9,000
+- Post & Core Treatment: ₹ 9,000
+- Orthodontic Treatment - Metal Braces: ₹ 25,000
+- Orthodontic Treatment - Ceramic Braces: ₹ 40,000
+- Orthodontic Treatment - Self Ligating: ₹ 40,000
+- Invisalign: ₹ 90,000 (Image link: `![Aligners Pricing](http://192.168.2.165:3001/public/images/Aligners-pricing.png)`)
+- Teeth Aligners: ₹ 40,000 (Image link: `![Aligners Pricing](http://192.168.2.165:3001/public/images/Aligners-pricing.png)`)
+- TMJ Splints/Oral Splints / Retainers: ₹ 15,000
+- Anti Snoring Device: ₹ 15,000
+- Night Guard: ₹ 5,000
+- Sports / Mouth Guard: ₹ 15,000
+- Flexible Dentures (RPD) - Partial: ₹ 15,000
+- Complete Dentures - Removable: ₹ 25,000
+- Temporary Dentures - After Implants: ₹ 25,000
+- Gum Surgery - LASER Assisted: ₹ 15,000
+- LANAP - LASER Assisted: ₹ 15,000
+- Gum Depigmentation - LASER Assisted: ₹ 15,000
+- Consultation & 3D Treatment Planning - Domestic: ₹ 500
+- Consultation & 3D Treatment Planning - International: ₹ 500
+- OPG - Full Mouth X-Ray: ₹ 1,000
+- CBCT - Full Mouth 3D Scan: ₹ 3,000
+- Conscious Sedation: ₹ 25,000
+- IV Sedation: ₹ 40,000
+- General Anaesthesia: ₹ 150,000
+
+(Note: Always include the image directly in your response so the patient can see it, if one is provided above.)
+
+Notes:
+Pediatric Procedures: All Pediatric procedures are charged similarly as adult procedures
+All Prices mentioned above are starting prices - Final estimate can only be created after consultation appointment
+First consultation appointment shall be with Head Consultant
