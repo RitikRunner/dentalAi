@@ -7,9 +7,10 @@ import {
 export async function chat(req, res) {
     try {
 
-        const { message, sessionId = "demo-user" } = req.body;
+        const { message, conversationId, sessionId = "demo-user" } = req.body;
+        const activeSessionId = conversationId || sessionId;
 
-        const state = await loadState(sessionId);
+        const state = await loadState(activeSessionId);
 
         state.messages.push({
             role: "user",

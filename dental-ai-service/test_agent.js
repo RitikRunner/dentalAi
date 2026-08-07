@@ -7,11 +7,11 @@ config();
 
 async function test() {
   await initVectorStore();
-  const ragContext = await searchKnowledgeBase("Root Canal Treatment pricing");
-  console.log("RAG CONTEXT:\\n", ragContext);
+  const ragContext = await searchKnowledgeBase("implant prices");
+  console.log("RAG CONTEXT:\n", ragContext);
   
   const state = {
-    messages: [new HumanMessage("Tell me about the RCT prices")],
+    messages: [new HumanMessage("i want to know about implant prices")],
     patient: { name: null, phone: null },
     appointment: { branch: null, doctor: null, date: null, preferredTime: null, reason: null },
     intent: "GENERAL",
@@ -20,7 +20,7 @@ async function test() {
   };
 
   const response = await invokeDentalAgent(state);
-  console.log("\\nAI RESPONSE:\\n", response.content);
+  console.log("\nAI RESPONSE:\n", response.content);
 }
 
 test();

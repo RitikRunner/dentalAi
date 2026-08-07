@@ -3,65 +3,64 @@ export function buildWorkflowInstruction(state) {
     switch (state.nextAction) {
         case "ASK_NAME":
             instruction = `
-The workflow engine has already decided the next step.
+The workflow engine has already decided the next step: you must ask for the patient's name.
 
-Generate a polite, natural language response asking for the patient's full name.
+CRITICAL: If the user just asked a general question (e.g., about prices, treatments, before/after images, or who you are), you MUST answer their question FIRST using the knowledge base.
+THEN, at the end of your response, politely ask for their full name so you can proceed with booking.
+
 DO NOT output the text "ASK_NAME" or any other workflow tokens.
-
-Do not ask for anything else.
-Do not skip ahead.
-Do not change the workflow.
+Do not ask for phone, branch, date, or time yet.
 `;
             break;
 
         case "ASK_PHONE":
             instruction = `
-The workflow engine has already decided the next step.
+The workflow engine has already decided the next step: you must ask for the patient's phone number.
 
-Generate a polite, natural language response asking for the patient's phone number.
+CRITICAL: If the user just asked a general question, you MUST answer their question FIRST using the knowledge base.
+THEN, at the end of your response, politely ask for their phone number.
+
 DO NOT output the text "ASK_PHONE" or any other workflow tokens.
-
-Do not ask for branch.
-Do not ask for date.
-Do not ask for time.
-Do not ask for doctor.
+Do not ask for branch, date, time, or doctor.
 `;
             break;
 
         case "ASK_BRANCH":
             instruction = `
-The workflow engine has already decided the next step.
+The workflow engine has already decided the next step: ask for the branch.
 
-Generate a polite, natural language response asking which clinic branch the patient prefers.
-DO NOT output the text "ASK_BRANCH" or any other workflow tokens.
+CRITICAL: If the user just asked a general question, you MUST answer their question FIRST using the knowledge base.
+THEN, at the end of your response, politely ask which clinic branch they prefer.
 
 Available branches:
 - Greater Kailash
 - Pitampura
 
-Do not ask anything else.
+DO NOT output the text "ASK_BRANCH" or any other workflow tokens.
+Do not ask for date or time yet.
 `;
             break;
 
         case "ASK_DATE":
             instruction = `
-The workflow engine has already decided the next step.
+The workflow engine has already decided the next step: ask for the date.
 
-Generate a polite, natural language response asking for the preferred appointment date.
+CRITICAL: If the user just asked a general question, you MUST answer their question FIRST using the knowledge base.
+THEN, at the end of your response, politely ask for their preferred appointment date.
+
 DO NOT output the text "ASK_DATE" or any other workflow tokens.
-
 Do not ask for time yet.
 `;
             break;
 
         case "ASK_TIME":
             instruction = `
-The workflow engine has already decided the next step.
+The workflow engine has already decided the next step: ask for the time.
 
-Generate a polite, natural language response asking for the preferred appointment time.
+CRITICAL: If the user just asked a general question, you MUST answer their question FIRST using the knowledge base.
+THEN, at the end of your response, politely ask for their preferred appointment time.
+
 DO NOT output the text "ASK_TIME" or any other workflow tokens.
-
-Do not ask for anything else.
 `;
             break;
 
