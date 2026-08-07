@@ -77,17 +77,16 @@ export async function invokeDentalAgent(state) {
     const workflowInstruction = buildWorkflowInstruction(state);
 
     // Final message list
+    let finalPrompt = prompt;
+    if (workflowInstruction) {
+        finalPrompt += "\n\n=== URGENT WORKFLOW INSTRUCTION ===\n" + workflowInstruction;
+    }
+
     const messages = [
-        new SystemMessage(prompt),
+        new SystemMessage(finalPrompt),
     ];
 
     messages.push(...chatHistory.slice(-6));
-
-    if (workflowInstruction) {
-        messages.push(
-            new SystemMessage(workflowInstruction)
-        );
-    }
 
     const response = await model.invoke(messages);
     return response;
